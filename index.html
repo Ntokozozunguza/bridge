@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bridge - Connecting Shelters and Donors</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Nunito Sans', sans-serif; }
+    body { background: #f2f2f2; color: #333; }
+
+    header { background: #4CAF50; color: #fff; padding: 1rem 1.5rem; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 10; border-bottom: 1px solid #ddd; }
+    header h1 { font-size: 1.5rem; letter-spacing: 1px; }
+
+    main { padding: 1rem; padding-bottom: 90px; }
+    section { display: none; animation: fadeIn 0.4s ease-in-out; }
+    section.active { display: block; }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+    .card { background: #fff; border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); padding: 1rem; margin-bottom: 1rem; transition: transform 0.2s ease, box-shadow 0.2s ease; }
+    .card:hover { transform: translateY(-4px); box-shadow: 0 6px 20px rgba(0,0,0,0.15); }
+
+    .card img { width: 100%; border-radius: 12px; margin-bottom: 10px; object-fit: cover; }
+    .card h2, .card h3 { color: #4CAF50; margin-bottom: 0.5rem; }
+    .card p, .card li { color: #555; }
+
+    .btn { background: #4CAF50; color: #fff; border: none; border-radius: 30px; padding: 0.6rem 1.2rem; cursor: pointer; font-weight: 600; margin-top: 0.5rem; transition: 0.3s; }
+    .btn:hover { background: #45a049; }
+
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1rem; }
+    .topbar { text-align: center; margin-bottom: 1.5rem; }
+    .topbar h2 { color: #333; font-size: 1.3rem; }
+
+    input, textarea { width: 100%; padding: 10px; border-radius: 20px; border: 1px solid #ccc; margin-bottom: 10px; background: #fff; color: #333; }
+    input::placeholder, textarea::placeholder { color: #999; }
+
+    footer { text-align: center; padding: 1rem; background: #f2f2f2; color: #333; border-top: 1px solid #ddd; }
+
+    /* Bottom Navigation */
+    .bottom-nav { position: fixed; bottom: 0; left: 0; width: 100%; background: #fff; box-shadow: 0 -2px 10px rgba(0,0,0,0.1); display: flex; justify-content: space-around; align-items: center; padding: 0.8rem 0; border-top: 1px solid #ddd; }
+    .bottom-nav button { background: none; border: none; color: #555; font-weight: 600; font-size: 0.9rem; display: flex; flex-direction: column; align-items: center; cursor: pointer; }
+    .bottom-nav button.active { color: #4CAF50; }
+    .icon { font-size: 1.3rem; margin-bottom: 2px; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Bridge</h1>
+  </header>
+
+  <main>
+    <!-- Home Page -->
+    <section id="home" class="active">
+      <div class="topbar"><h2>Discover Shelters in Need</h2></div>
+      <div class="grid">
+        <div class="card">
+          <img src="https://via.placeholder.com/300x300" alt="Shelter">
+          <h2>Hope Haven Shelter</h2>
+          <p><strong>Needs:</strong> Food, Blankets, Hygiene Supplies</p>
+          <p><strong>Location:</strong> Downtown City</p>
+          <button class="btn" onclick="showPage('shelter-profile')">View Details</button>
+        </div>
+        <div class="card">
+          <img src="https://via.placeholder.com/300x300" alt="Shelter">
+          <h2>Safe Nights Centre</h2>
+          <p><strong>Needs:</strong> Clothes, Bedding, Toys</p>
+          <p><strong>Location:</strong> East Park</p>
+          <button class="btn" onclick="showPage('shelter-profile')">View Details</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Shelter Profile -->
+    <section id="shelter-profile">
+      <div class="card">
+        <img src="https://via.placeholder.com/400x250" alt="Hope Haven">
+        <h2>Hope Haven Shelter</h2>
+        <p><strong>Location:</strong> Downtown</p>
+        <p><strong>About:</strong> Providing meals and temporary housing for families in need.</p>
+        <h3 style="margin-top:1rem;">Current Needs</h3>
+        <ul style="margin-left:20px; margin-top:5px;">
+          <li>50 Blankets</li>
+          <li>100 Meals</li>
+          <li>20 Hygiene Kits</li>
+        </ul>
+        <button class="btn">Donate Now</button>
+      </div>
+    </section>
+
+    <!-- Shelter Dashboard -->
+    <section id="shelter-dashboard">
+      <div class="topbar"><h2>My Shelter Dashboard</h2></div>
+      <div class="card">
+        <h3>Post a New Need</h3>
+        <input type="text" placeholder="Item name"> 
+        <input type="number" placeholder="Quantity">
+        <button class="btn">Add</button>
+      </div>
+      <div class="card">
+        <h3>Active Needs</h3>
+        <ul style="margin-left:20px;">
+          <li>Blankets (30/50 received)</li>
+          <li>Meals (75/100 received)</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Donor Dashboard -->
+    <section id="donor-dashboard">
+      <div class="topbar"><h2>My Donations</h2></div>
+      <div class="grid">
+        <div class="card">
+          <h3>Hope Haven Shelter</h3>
+          <p><strong>Donated:</strong> 10 Blankets</p>
+          <p><strong>Status:</strong> Delivered ✅</p>
+        </div>
+        <div class="card">
+          <h3>Safe Nights Centre</h3>
+          <p><strong>Donated:</strong> 5 Boxes of Food</p>
+          <p><strong>Status:</strong> In Transit 🚚</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Page -->
+    <section id="about">
+      <div class="card">
+        <h2>About Bridge</h2>
+        <p>Bridge connects shelters and donors directly, making giving faster and smarter. Shelters list their needs, and donors can fulfill them with full transparency and live updates.</p>
+      </div>
+    </section>
+
+    <!-- Contact Page -->
+    <section id="contact">
+      <div class="card" style="max-width:500px; margin:auto;">
+        <h2>Contact & Support</h2>
+        <input type="text" placeholder="Your Name">
+        <input type="email" placeholder="Your Email">
+        <textarea placeholder="Your Message"></textarea>
+        <button class="btn" style="width:100%">Send Message</button>
+      </div>
+    </section>
+
+    <!-- Login Page -->
+    <section id="login">
+      <div class="card" style="max-width:400px; margin:auto;">
+        <h2>Login / Signup</h2>
+        <input type="email" placeholder="Email">
+        <input type="password" placeholder="Password">
+        <button class="btn" style="width:100%">Login</button>
+        <p style="margin-top:10px; text-align:center;">Don’t have an account? <a href="#" style="color:#4CAF50; text-decoration:none;">Sign up</a></p>
+      </div>
+    </section>
+  </main>
+
+  <div class="bottom-nav">
+    <button id="nav-home" onclick="showPage('home')">🏠<span>Home</span></button>
+    <button id="nav-shelters" onclick="showPage('shelter-profile')">🏡<span>Shelters</span></button>
+    <button id="nav-donor" onclick="showPage('donor-dashboard')">💝<span>Donations</span></button>
+    <button id="nav-dashboard" onclick="showPage('shelter-dashboard')">📊<span>Dashboard</span></button>
+    <button id="nav-login" onclick="showPage('login')">👤<span>Login</span></button>
+  </div>
+
+  <footer>
+    <p>© 2025 Bridge App — Connecting Help with Hope.</p>
+  </footer>
+
+  <script>
+    function showPage(pageId) {
+      const sections = document.querySelectorAll('section');
+      sections.forEach(sec => sec.classList.remove('active'));
+      const page = document.getElementById(pageId);
+      if (page) page.classList.add('active');
+
+      const navButtons = document.querySelectorAll('.bottom-nav button');
+      navButtons.forEach(btn => btn.classList.remove('active'));
+      const navMap = {
+        home: 'nav-home',
+        'shelter-profile': 'nav-shelters',
+        'donor-dashboard': 'nav-donor',
+        'shelter-dashboard': 'nav-dashboard',
+        login: 'nav-login'
+      };
+      if (navMap[pageId]) document.getElementById(navMap[pageId]).classList.add('active');
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } // <-- Added closing brace for function
+
+    // Initialize first active page
+    showPage('home');
+  </script>
+</body>
+</html>
